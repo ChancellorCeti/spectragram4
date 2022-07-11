@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { Text, View,StyleSheet,Platform,StatusBar,SafeAreaView,Image, FlatList } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
-let stories = require("./temp_stories.json");
+let posts = require("./temp_data.json");
 export default class Feed extends Component {
-    renderItem = ({ item: story }) => {
-        return <StoryCard post={story} navigation={this.props.navigation}/>;
-      };
-    
-      keyExtractor = (item, index) => index.toString();
+     constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    componentDidMount() { }
+
+    renderItem = ({ item: post }) => {
+        return <PostCard post={post} navigation={this.props.navigation} />;
+    };
+
+    keyExtractor = (item, index) => index.toString();
     render() {
         
         return (
@@ -27,7 +34,7 @@ export default class Feed extends Component {
             <View style={styles.cardContainer}>
                 <FlatList
                     keyExtractor={this.keyExtractor}
-                    data={stories}
+                    data={posts}
                     renderItem={this.renderItem}
                 />
             </View>
